@@ -1,0 +1,32 @@
+#!/usr/bin/env python2
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Nov 30 17:51:27 2017
+
+@author: chunyilyu
+"""
+
+def phoneMask(phone):
+    phone = phone[2:]
+    print(phone)
+    mask_inv = ''
+    count = 0
+    for i in range(len(phone)-1, -1,-1):
+        cur = phone[i]
+
+        if cur == '-' or cur == '(' or cur == ')' or cur ==' ':
+            continue
+        if count == 4 or count == 7 or count == 10:
+            mask_inv += '-'
+        elif cur == '+':
+            mask_inv += '+'
+        if cur.isdigit():
+            if count < 4:
+                mask_inv += cur
+            else:
+                mask_inv += '*'
+        count += 1
+    mask_inv += ':P'
+    mask = mask_inv[::-1]
+    return mask
+print(phoneMask('P:+1(333) 456-7890'))
